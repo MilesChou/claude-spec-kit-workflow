@@ -14,6 +14,7 @@ help: ## 顯示使用說明
 	@echo "  make download VERSION=x.x.x   下載指定版本"
 	@echo "  make download-latest       下載最新版本"
 	@echo "  make source                Clone spec-kit 原始碼到 .tmp/source"
+	@echo "  make package               打包 spec-kit-flow 到 .tmp/build"
 	@echo "  make clean                 清理 .tmp 目錄"
 
 .PHONY: download
@@ -48,8 +49,16 @@ source: ## Clone spec-kit 原始碼
 	fi
 	@echo "完成！原始碼位於 .tmp/source/ 目錄"
 
+.PHONY: package
+package: ## 打包 spec-kit-flow 到 .tmp/build
+	@echo "打包 spec-kit-flow..."
+	@mkdir -p .tmp/build
+	@cd spec-kit-flow && zip -r ../.tmp/build/spec-kit-flow.zip . -x "*.DS_Store"
+	@echo "完成！檔案位於 .tmp/build/spec-kit-flow.zip"
+
 .PHONY: clean
 clean: ## 清理 .tmp 目錄
 	@echo "清理 .tmp 目錄..."
 	@rm -rf .tmp
 	@echo "清理完成"
+

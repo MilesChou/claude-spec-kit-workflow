@@ -12,9 +12,16 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. Run `./scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. Determine file locations and verify prerequisites:
+   - If user provides a directory path in $ARGUMENTS, use that as base directory
+   - Otherwise, use current working directory as base directory
+   - Verify required files exist in base directory:
+     - REQUIRED: tasks.md, plan.md, spec.md
+     - If missing: abort and instruct user to run the appropriate `speckit.*` command
+   - Check for optional documents: data-model.md, contracts/, research.md, quickstart.md
+   - All paths must be absolute
 
-2. **Check checklists status** (if FEATURE_DIR/checklists/ exists):
+2. **Check checklists status** (if {base-dir}/checklists/ exists):
    - Scan all checklist files in the checklists/ directory
    - For each checklist, count:
      * Total items: All lines matching `- [ ]` or `- [X]` or `- [x]`

@@ -12,7 +12,14 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. **Setup**: Run `./scripts/bash/setup-plan.sh --json` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **Setup**: Determine file locations:
+   - If user provides a directory path in $ARGUMENTS, use that as base directory
+   - Otherwise, use current working directory as base directory
+   - Set paths:
+     - FEATURE_SPEC: `{base-dir}/spec.md`
+     - IMPL_PLAN: `{base-dir}/plan.md`
+   - Verify FEATURE_SPEC exists; if not, instruct user to run `speckit.specify` first
+   - All paths must be absolute
 
 2. **Load context**: Read FEATURE_SPEC and `./memory/constitution.md`. Load IMPL_PLAN template (already copied).
 
@@ -25,7 +32,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Phase 1: Update agent context by running the agent script
    - Re-evaluate Constitution Check post-design
 
-4. **Stop and report**: Command ends after Phase 2 planning. Report branch, IMPL_PLAN path, and generated artifacts.
+4. **Stop and report**: Command ends after Phase 2 planning. Report IMPL_PLAN path and generated artifacts.
 
 ## Phases
 
@@ -65,12 +72,10 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Use standard REST/GraphQL patterns
    - Output OpenAPI/GraphQL schema to `/contracts/`
 
-3. **Agent context update**:
-   - Run `./scripts/bash/update-agent-context.sh claude`
-   - These scripts detect which AI agent is in use
-   - Update the appropriate agent-specific context file
+3. **Agent context update** (optional):
+   - If needed, manually update agent context files (CLAUDE.md, GEMINI.md, etc.)
    - Add only new technology from current plan
-   - Preserve manual additions between markers
+   - This step can be skipped for basic workflow
 
 **Output**: data-model.md, /contracts/*, quickstart.md, agent-specific file
 

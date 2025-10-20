@@ -47,14 +47,12 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
    - 是否啟用澄清階段
 
 3. 檢查專案環境
-   - 確認是否在 git repository 中
-   - 檢查必要的 scripts 和 templates 是否存在
+   - 檢查必要的 templates 是否存在
 
 ### 步驟 2：產生規格 (Specify)
 
-1. 執行功能等同於 `/speckit.specify` command
+1. 執行功能等同於 `speckit.specify` command
    - 產生 feature branch 的 short name
-   - 執行 `./scripts/bash/create-new-feature.sh`
    - 載入 `./templates/spec-template.md`
    - 根據功能描述產生初始規格
 
@@ -77,7 +75,6 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 **執行內容：**
 
 1. 載入當前規格檔案
-   - 執行 `./scripts/bash/check-prerequisites.sh`
    - 讀取 FEATURE_SPEC 路徑
 
 2. 分析規格的模糊性
@@ -107,7 +104,6 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 **執行內容：**
 
 1. 設定計劃環境
-   - 執行 `./scripts/bash/setup-plan.sh`
    - 解析 FEATURE_SPEC、IMPL_PLAN 路徑
 
 2. 載入上下文
@@ -137,7 +133,6 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 **執行內容：**
 
 1. 設定任務環境
-   - 執行 `./scripts/bash/check-prerequisites.sh --require-tasks`
    - 取得 FEATURE_DIR 和 AVAILABLE_DOCS
 
 2. 載入設計文件
@@ -174,9 +169,9 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
    - 其他 artifacts
 
 2. 提供下一步建議
-   - 如果只產生 spec：建議執行 `/speckit.clarify` 或 `/speckit.plan`
-   - 如果產生到 plan：建議執行 `/speckit.tasks`
-   - 如果產生到 tasks：建議執行 `/speckit.implement` 或檢視 checklist
+   - 如果只產生 spec：建議執行 `speckit.clarify` 或 `speckit.plan`
+   - 如果產生到 plan：建議執行 `speckit.tasks`
+   - 如果產生到 tasks：建議執行 `speckit.implement` 或檢視 checklist
 
 3. 顯示執行統計
    - 總執行時間
@@ -213,11 +208,11 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 
 ### 範例 1：快速產生規格
 
-\`\`\`
+```
 請使用 spec-kit，只產生規格文件。
 
 功能描述：建立一個使用者認證系統，支援 email/password 登入和社群媒體登入。
-\`\`\`
+```
 
 **預期輸出：**
 - spec.md
@@ -225,22 +220,22 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 
 ### 範例 2：產生規格和計劃
 
-\`\`\`
+```
 請使用 spec-kit，產生規格和實作計劃。
 
 功能描述：開發一個部落格系統，支援文章發布、分類、標籤和評論功能。
-\`\`\`
+```
 
 **預期輸出：**
 - spec.md + plan.md + research.md + data-model.md + contracts/
 
 ### 範例 3：完整工作流程
 
-\`\`\`
+```
 請使用 spec-kit 完整流程。
 
 功能描述：建立一個電商平台的購物車功能，包括商品管理、庫存檢查、優惠券和結帳流程。
-\`\`\`
+```
 
 **預期輸出：**
 - spec.md (含 Clarifications 區段)
@@ -251,8 +246,7 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 
 ### 執行環境需求
 
-- 必須在 git repository 中執行
-- 需要有 spec-kit 的 scripts 和 templates
+- 需要有 spec-kit 的 templates
 - 建議在乾淨的 working directory 執行
 
 ### 互動式處理
@@ -299,10 +293,10 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 
 此 skill 整合了以下 commands 的功能：
 
-- `/speckit.specify`：產生規格文件
-- `/speckit.clarify`：澄清需求
-- `/speckit.plan`：產生實作計劃
-- `/speckit.tasks`：產生任務清單
+- `speckit.specify`：產生規格文件
+- `speckit.clarify`：澄清需求
+- `speckit.plan`：產生實作計劃
+- `speckit.tasks`：產生任務清單
 
 如果需要單獨執行某個階段，可以直接使用對應的 command。
 
@@ -319,12 +313,6 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 **解決方案：**
 - 確認 spec-kit 目錄結構完整
 - 檢查 `./templates/` 目錄是否存在
-
-### 問題：Scripts 執行失敗
-
-**解決方案：**
-- 確認 scripts 有執行權限：`chmod +x ./scripts/bash/*.sh`
-- 檢查 bash 版本是否符合需求
 
 ### 問題：澄清問題太多
 

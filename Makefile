@@ -50,11 +50,11 @@ source: ## Clone spec-kit 原始碼
 	@echo "完成！原始碼位於 .tmp/source/ 目錄"
 
 .PHONY: package
-package: ## 打包 spec-kit-flow 到 .tmp/build
-	@echo "打包 spec-kit-flow..."
+package: ## 打包 spec-kit 到 .tmp/build
+	@echo "打包 spec-kit..."
 	@mkdir -p .tmp/build
-	@cd spec-kit-flow && zip -r ../.tmp/build/spec-kit-flow.zip . -x "*.DS_Store"
-	@echo "完成！檔案位於 .tmp/build/spec-kit-flow.zip"
+	@cd spec-kit && zip -r ../.tmp/build/spec-kit.zip . -x "*.DS_Store"
+	@echo "完成！檔案位於 .tmp/build/spec-kit.zip"
 
 .PHONY: clean
 clean: ## 清理 .tmp 目錄

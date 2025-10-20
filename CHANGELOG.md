@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - 初始化專案結構
-- 新增 `spec-kit-flow` skill
+- 新增 `spec-kit` skill
   - 提供完整的 spec-kit 工作流程自動化
   - 支援從功能描述到任務清單的端到端流程
   - 整合 specify、clarify、plan、tasks 四個階段

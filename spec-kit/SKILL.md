@@ -1,9 +1,9 @@
 ---
-name: spec-kit-flow
+name: spec-kit
 description: 依照 spec-kit 的標準工作流程，從功能描述自動產生完整的規格文件、澄清需求、產生實作計劃與任務清單
 ---
 
-# Spec Kit Flow
+# Spec Kit
 
 這個 skill 提供一個自動化的工作流程，協助你從功能描述開始，逐步產生完整的 specification、計劃和任務清單。
 
@@ -214,7 +214,7 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 ### 範例 1：快速產生規格
 
 \`\`\`
-請使用 spec-kit-flow，只產生規格文件。
+請使用 spec-kit，只產生規格文件。
 
 功能描述：建立一個使用者認證系統，支援 email/password 登入和社群媒體登入。
 \`\`\`
@@ -226,7 +226,7 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 ### 範例 2：產生規格和計劃
 
 \`\`\`
-請使用 spec-kit-flow，產生規格和實作計劃。
+請使用 spec-kit，產生規格和實作計劃。
 
 功能描述：開發一個部落格系統，支援文章發布、分類、標籤和評論功能。
 \`\`\`
@@ -237,7 +237,7 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 ### 範例 3：完整工作流程
 
 \`\`\`
-請使用 spec-kit-flow 完整流程。
+請使用 spec-kit 完整流程。
 
 功能描述：建立一個電商平台的購物車功能，包括商品管理、庫存檢查、優惠券和結帳流程。
 \`\`\`
@@ -252,7 +252,7 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 ### 執行環境需求
 
 - 必須在 git repository 中執行
-- 需要有 spec-kit-flow 的 scripts 和 templates
+- 需要有 spec-kit 的 scripts 和 templates
 - 建議在乾淨的 working directory 執行
 
 ### 互動式處理
@@ -317,7 +317,7 @@ description: 依照 spec-kit 的標準工作流程，從功能描述自動產生
 ### 問題：缺少 templates
 
 **解決方案：**
-- 確認 spec-kit-flow 目錄結構完整
+- 確認 spec-kit 目錄結構完整
 - 檢查 `./templates/` 目錄是否存在
 
 ### 問題：Scripts 執行失敗

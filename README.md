@@ -1,4 +1,4 @@
-# Spec Kit Flow
+# Speckit
 
 ## License
 

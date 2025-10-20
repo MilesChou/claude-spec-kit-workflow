@@ -1,15 +1,15 @@
 ---
-name: spec-kit
-description: 依照 spec-kit 的標準工作流程，引導式地產生規格文件、澄清需求、產生實作計劃與任務清單，每個階段都需要人工審核確認
+name: speckit
+description: 依照 speckit 的標準工作流程，引導式地產生規格文件、澄清需求、產生實作計劃與任務清單，每個階段都需要人工審核確認
 ---
 
-# Spec Kit
+# Speckit
 
 這個 skill 提供一個引導式的工作流程，協助你從功能描述開始，**階段性地**產生完整的 specification、計劃和任務清單。每個階段完成後都會停下來等待你的審核確認，確保品質符合預期後才進入下一階段。
 
 ## 核心功能
 
-- 引導式執行 spec-kit 的標準工作流程
+- 引導式執行 speckit 的標準工作流程
 - **每個階段都有強制性的人工審核點**
 - 提供清晰的品質檢查清單
 - 支援審核不通過時的修正機制
@@ -412,7 +412,7 @@ description: 依照 spec-kit 的標準工作流程，引導式地產生規格文
 ### 範例 1：開始新功能（Specify）
 
 ```
-使用者：請使用 spec-kit，我要開發一個使用者認證系統，支援 email/password 登入和社群媒體登入。
+使用者：請使用 speckit，我要開發一個使用者認證系統，支援 email/password 登入和社群媒體登入。
 
 階段：specify
 功能描述：建立一個使用者認證系統，支援 email/password 登入和社群媒體登入。
@@ -493,7 +493,7 @@ Feature 名稱：user-authentication
 
 ### 執行環境需求
 
-- 需要有 spec-kit 的 templates
+- 需要有 speckit 的 templates
 - 建議在乾淨的 working directory 執行
 - 確保有足夠的權限建立檔案和目錄
 
@@ -569,7 +569,7 @@ Feature 名稱：user-authentication
 ### 問題：缺少 templates
 
 **解決方案：**
-- 確認 spec-kit 目錄結構完整
+- 確認 speckit 目錄結構完整
 - 檢查 `./templates/` 目錄是否存在
 - 下載或建立缺少的 template 檔案
 

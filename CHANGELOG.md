@@ -12,14 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - 初始化專案結構
-- 新增 `spec-kit` skill
-  - 提供完整的 spec-kit 工作流程自動化
+- 新增 `speckit` skill
+  - 提供完整的 speckit 工作流程自動化
   - 支援從功能描述到任務清單的端到端流程
   - 整合 specify、clarify、plan、tasks 四個階段
   - 支援彈性的執行深度選擇（spec/plan/tasks/full）
   - 提供智慧化的需求澄清機制
   - 自動產生規格文件、實作計劃和任務清單
-- 包含完整的 spec-kit commands
+- 包含完整的 speckit commands
   - `/speckit.specify`：產生規格文件
   - `/speckit.clarify`：澄清需求
   - `/speckit.plan`：產生實作計劃

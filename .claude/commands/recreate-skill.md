@@ -27,14 +27,14 @@ make recreate VERSION=0.0.72
 ```
 
 此指令會：
-- 建立 `spec-kit/` 目錄
+- 建立 `speckit/` 目錄
 - 複製 8 個 command 檔案（`speckit.*.md`）
 - 複製 `templates/` 和 `memory/` 目錄
 - 不複製 `scripts/` 目錄（已移除 git 依賴）
 
 ### 2. 建立 SKILL.md
 
-在 `spec-kit/` 目錄下建立 `SKILL.md` 作為主入口點，描述整體工作流程並整合所有 commands。
+在 `speckit/` 目錄下建立 `SKILL.md` 作為主入口點，描述整體工作流程並整合所有 commands。
 
 ### 3. 重製 Commands（移除 git 依賴）
 
@@ -85,9 +85,9 @@ Determine file locations:
     └── memory/           # ✅ constitution
 ```
 
-**最終結果（spec-kit）**：
+**最終結果（speckit）**：
 ```
-spec-kit/
+speckit/
 ├── SKILL.md              # ✅ Skill 主入口
 ├── speckit.*.md          # ✅ 8 個 commands（已重製）
 ├── templates/            # ✅ 5 個範本檔案

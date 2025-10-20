@@ -8,7 +8,7 @@ Think in English, but generate responses in Traditional Chinese (思考以英語
 
 ## 專案概述
 
-這是一個 Claude Code Plugin/Skill 專案，名稱為 `spec-kit-skill`，目的是提供 specification 相關的工具和功能給 Claude Code 使用。
+這是一個 Claude Code Plugin/Skill 專案，名稱為 `speckit`，目的是提供 specification 相關的工具和功能給 Claude Code 使用。
 
 ## 開發環境設定
 

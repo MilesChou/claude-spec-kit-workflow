@@ -1,4 +1,4 @@
-# spec-kit Makefile
+# speckit Makefile
 
 VERSION ?= 0.0.72
 TEMPLATE_NAME := spec-kit-template-claude-sh
@@ -7,18 +7,18 @@ DOWNLOAD_URL := https://github.com/github/spec-kit/releases/download/v$(VERSION)
 
 .PHONY: help
 help: ## 顯示使用說明
-	@echo "spec-kit 下載工具"
+	@echo "speckit 下載工具"
 	@echo ""
 	@echo "使用方式："
 	@echo "  make download              下載預設版本 (v$(VERSION))"
 	@echo "  make download VERSION=x.x.x   下載指定版本"
 	@echo "  make download-latest       下載最新版本"
-	@echo "  make recreate              重新建立 spec-kit 目錄結構 (預設 v$(VERSION))"
+	@echo "  make recreate              重新建立 speckit 目錄結構 (預設 v$(VERSION))"
 	@echo "  make recreate VERSION=x.x.x   從指定版本重新建立"
 	@echo "  make source                Clone spec-kit 原始碼到 .tmp/source"
-	@echo "  make package               打包 spec-kit-flow 到 .tmp/build"
-	@echo "  make diff                  比較指定版本與 spec-kit 的差異 (預設 v$(VERSION))"
-	@echo "  make diff VERSION=x.x.x    比較指定版本與 spec-kit 的差異"
+	@echo "  make package               打包 speckit 到 .tmp/build"
+	@echo "  make diff                  比較指定版本與 speckit 的差異 (預設 v$(VERSION))"
+	@echo "  make diff VERSION=x.x.x    比較指定版本與 speckit 的差異"
 	@echo "  make clean                 清理 .tmp 目錄"
 
 .PHONY: download
@@ -42,21 +42,21 @@ download-latest: ## 下載並解壓縮最新版本
 	@echo "完成！檔案位於 .tmp/releases/latest/ 目錄"
 
 .PHONY: recreate
-recreate: ## 重新建立 spec-kit 目錄結構
+recreate: ## 重新建立 speckit 目錄結構
 	@if [ ! -d ".tmp/releases/$(VERSION)" ]; then \
 		echo "錯誤：版本 $(VERSION) 尚未下載"; \
 		echo "請先執行: make download VERSION=$(VERSION)"; \
 		exit 1; \
 	fi
-	@echo "重新建立 spec-kit 目錄結構 (v$(VERSION))..."
-	@mkdir -p spec-kit
+	@echo "重新建立 speckit 目錄結構 (v$(VERSION))..."
+	@mkdir -p speckit
 	@echo "複製 commands..."
-	@cp .tmp/releases/$(VERSION)/.claude/commands/speckit.*.md spec-kit/
+	@cp .tmp/releases/$(VERSION)/.claude/commands/speckit.*.md speckit/
 	@echo "複製 templates..."
-	@cp -r .tmp/releases/$(VERSION)/.specify/templates spec-kit/
+	@cp -r .tmp/releases/$(VERSION)/.specify/templates speckit/
 	@echo "複製 memory..."
-	@cp -r .tmp/releases/$(VERSION)/.specify/memory spec-kit/
-	@echo "完成！spec-kit 目錄已重新建立"
+	@cp -r .tmp/releases/$(VERSION)/.specify/memory speckit/
+	@echo "完成！speckit 目錄已重新建立"
 
 .PHONY: source
 source: ## Clone spec-kit 原始碼
@@ -71,24 +71,24 @@ source: ## Clone spec-kit 原始碼
 	@echo "完成！原始碼位於 .tmp/source/ 目錄"
 
 .PHONY: package
-package: ## 打包 spec-kit 到 .tmp/build
-	@echo "打包 spec-kit..."
+package: ## 打包 speckit 到 .tmp/build
+	@echo "打包 speckit..."
 	@mkdir -p .tmp/build
-	@cd spec-kit && zip -r ../.tmp/build/spec-kit.zip . -x "*.DS_Store"
-	@echo "完成！檔案位於 .tmp/build/spec-kit.zip"
+	@cd speckit && zip -r ../.tmp/build/speckit.zip . -x "*.DS_Store"
+	@echo "完成！檔案位於 .tmp/build/speckit.zip"
 
 .PHONY: diff
-diff: ## 比較指定版本與 spec-kit 的差異
+diff: ## 比較指定版本與 speckit 的差異
 	@if [ ! -d ".tmp/releases/$(VERSION)" ]; then \
 		echo "錯誤：版本 $(VERSION) 尚未下載"; \
 		echo "請先執行: make download VERSION=$(VERSION)"; \
 		exit 1; \
 	fi
-	@echo "比較 v$(VERSION) 與 spec-kit 的差異"
+	@echo "比較 v$(VERSION) 與 speckit 的差異"
 	@echo ""
 	@for filename in speckit.analyze.md speckit.checklist.md speckit.clarify.md speckit.constitution.md speckit.implement.md speckit.plan.md speckit.specify.md speckit.tasks.md; do \
 		source_file=".tmp/releases/$(VERSION)/.claude/commands/$$filename"; \
-		target_file="spec-kit/$$filename"; \
+		target_file="speckit/$$filename"; \
 		echo "========================================"; \
 		echo "檔案: $$filename"; \
 		echo "========================================"; \

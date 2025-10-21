@@ -6,99 +6,99 @@ REPO_URL := https://github.com/github/spec-kit.git
 DOWNLOAD_URL := https://github.com/github/spec-kit/releases/download/v$(VERSION)/$(TEMPLATE_NAME)-v$(VERSION).zip
 
 .PHONY: help
-help: ## 顯示使用說明
-	@echo "speckit 下載工具"
+help: ## Show help message
+	@echo "speckit Download Tool"
 	@echo ""
-	@echo "使用方式："
-	@echo "  make download              下載預設版本 (v$(VERSION))"
-	@echo "  make download VERSION=x.x.x   下載指定版本"
-	@echo "  make download-latest       下載最新版本"
-	@echo "  make recreate              重新建立 speckit 目錄結構 (預設 v$(VERSION))"
-	@echo "  make recreate VERSION=x.x.x   從指定版本重新建立"
-	@echo "  make source                Clone spec-kit 原始碼到 .tmp/source"
-	@echo "  make package               打包 speckit 到 .tmp/build"
-	@echo "  make diff                  比較指定版本與 speckit 的差異 (預設 v$(VERSION))"
-	@echo "  make diff VERSION=x.x.x    比較指定版本與 speckit 的差異"
-	@echo "  make clean                 清理 .tmp 目錄"
+	@echo "Usage:"
+	@echo "  make download              Download default version (v$(VERSION))"
+	@echo "  make download VERSION=x.x.x   Download specific version"
+	@echo "  make download-latest       Download latest version"
+	@echo "  make recreate              Recreate speckit directory structure (default v$(VERSION))"
+	@echo "  make recreate VERSION=x.x.x   Recreate from specific version"
+	@echo "  make source                Clone spec-kit source code to .tmp/source"
+	@echo "  make package               Package speckit to .tmp/build"
+	@echo "  make diff                  Compare specific version with speckit (default v$(VERSION))"
+	@echo "  make diff VERSION=x.x.x    Compare specific version with speckit"
+	@echo "  make clean                 Clean .tmp directory"
 
 .PHONY: download
-download: ## 下載並解壓縮指定版本
-	@echo "下載 spec-kit v$(VERSION)..."
+download: ## Download and extract specific version
+	@echo "Downloading spec-kit v$(VERSION) ..."
+	@rm -rf .tmp/releases/$(VERSION)
 	@mkdir -p .tmp/releases/$(VERSION)
-	@curl -L -o .tmp/releases/$(VERSION)/spec-kit.zip $(DOWNLOAD_URL)
-	@echo "解壓縮中..."
+	@curl -sS -L -o .tmp/releases/$(VERSION)/spec-kit.zip $(DOWNLOAD_URL)
 	@cd .tmp/releases/$(VERSION) && unzip -q -o spec-kit.zip
 	@rm .tmp/releases/$(VERSION)/spec-kit.zip
-	@echo "完成！檔案位於 .tmp/releases/$(VERSION)/ 目錄"
+	@echo "Done, files in .tmp/releases/$(VERSION)/"
 
 .PHONY: download-latest
-download-latest: ## 下載並解壓縮最新版本
-	@echo "下載最新版本的 spec-kit..."
+download-latest: ## Download and extract latest version
+	@echo "Downloading latest version of spec-kit..."
 	@mkdir -p .tmp/releases/latest
 	@curl -L -o .tmp/releases/latest/spec-kit.zip https://github.com/github/spec-kit/releases/latest/download/$(TEMPLATE_NAME).zip
-	@echo "解壓縮中..."
+	@echo "Extracting..."
 	@cd .tmp/releases/latest && unzip -q -o spec-kit.zip
 	@rm .tmp/releases/latest/spec-kit.zip
-	@echo "完成！檔案位於 .tmp/releases/latest/ 目錄"
+	@echo "Done! Files in .tmp/releases/latest/ directory"
 
 .PHONY: recreate
-recreate: ## 重新建立 speckit 目錄結構
+recreate: ## Recreate speckit directory structure
 	@if [ ! -d ".tmp/releases/$(VERSION)" ]; then \
-		echo "錯誤：版本 $(VERSION) 尚未下載"; \
-		echo "請先執行: make download VERSION=$(VERSION)"; \
+		echo "Error: Version $(VERSION) not downloaded yet"; \
+		echo "Please run: make download VERSION=$(VERSION)"; \
 		exit 1; \
 	fi
-	@echo "重新建立 speckit 目錄結構 (v$(VERSION))..."
+	@echo "Recreating speckit directory structure (v$(VERSION))..."
 	@mkdir -p speckit
-	@echo "複製 commands..."
+	@echo "Copying commands..."
 	@cp .tmp/releases/$(VERSION)/.claude/commands/speckit.*.md speckit/
-	@echo "複製 templates..."
+	@echo "Copying templates..."
 	@cp -r .tmp/releases/$(VERSION)/.specify/templates speckit/
-	@echo "複製 memory..."
+	@echo "Copying memory..."
 	@cp -r .tmp/releases/$(VERSION)/.specify/memory speckit/
-	@echo "完成！speckit 目錄已重新建立"
+	@echo "Done! speckit directory recreated"
 
 .PHONY: source
-source: ## Clone spec-kit 原始碼
+source: ## Clone spec-kit source code
 	@if [ -d .tmp/source ]; then \
-		echo "更新 spec-kit 原始碼..."; \
+		echo "Updating spec-kit source code..."; \
 		cd .tmp/source && git pull; \
 	else \
-		echo "Clone spec-kit 原始碼..."; \
+		echo "Cloning spec-kit source code..."; \
 		mkdir -p .tmp; \
 		git clone $(REPO_URL) .tmp/source; \
 	fi
-	@echo "完成！原始碼位於 .tmp/source/ 目錄"
+	@echo "Done! Source code in .tmp/source/ directory"
 
 .PHONY: package
-package: ## 打包 speckit 到 .tmp/build
-	@echo "打包 speckit..."
+package: ## Package speckit to .tmp/build
+	@echo "Packaging speckit..."
 	@mkdir -p .tmp/build
 	@cd speckit && zip -r ../.tmp/build/speckit.zip . -x "*.DS_Store"
-	@echo "完成！檔案位於 .tmp/build/speckit.zip"
+	@echo "Done! File in .tmp/build/speckit.zip"
 
 .PHONY: diff
-diff: ## 比較指定版本與 speckit 的差異
+diff: ## Compare specific version with speckit
 	@if [ ! -d ".tmp/releases/$(VERSION)" ]; then \
-		echo "錯誤：版本 $(VERSION) 尚未下載"; \
-		echo "請先執行: make download VERSION=$(VERSION)"; \
+		echo "Error: Version $(VERSION) not downloaded yet"; \
+		echo "Please run: make download VERSION=$(VERSION)"; \
 		exit 1; \
 	fi
-	@echo "比較 v$(VERSION) 與 speckit 的差異"
+	@echo "Comparing v$(VERSION) with speckit"
 	@echo ""
 	@for filename in speckit.analyze.md speckit.checklist.md speckit.clarify.md speckit.constitution.md speckit.implement.md speckit.plan.md speckit.specify.md speckit.tasks.md; do \
 		source_file=".tmp/releases/$(VERSION)/.claude/commands/$$filename"; \
 		target_file="speckit/$$filename"; \
 		echo "========================================"; \
-		echo "檔案: $$filename"; \
+		echo "File: $$filename"; \
 		echo "========================================"; \
 		diff -u "$$source_file" "$$target_file" || true; \
 		echo ""; \
 	done
 
 .PHONY: clean
-clean: ## 清理 .tmp 目錄
-	@echo "清理 .tmp 目錄..."
+clean: ## Clean .tmp directory
+	@echo "Cleaning .tmp directory..."
 	@rm -rf .tmp
-	@echo "清理完成"
+	@echo "Clean complete"
 

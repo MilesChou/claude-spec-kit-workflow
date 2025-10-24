@@ -1,6 +1,6 @@
 # speckit Makefile
 
-VERSION ?= 0.0.72
+VERSION ?= 0.0.79
 TEMPLATE_NAME := spec-kit-template-claude-sh
 REPO_URL := https://github.com/github/spec-kit.git
 DOWNLOAD_URL := https://github.com/github/spec-kit/releases/download/v$(VERSION)/$(TEMPLATE_NAME)-v$(VERSION).zip

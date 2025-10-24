@@ -10,6 +10,8 @@ Think in English, but generate responses in Traditional Chinese (思考以英語
 
 這是一個 Claude Code Plugin/Skill 專案，名稱為 `speckit`，目的是提供 specification 相關的工具和功能給 Claude Code 使用。
 
+**目前版本**: v0.0.79（初始開發階段）
+
 ## 開發環境設定
 
 目前專案處於初始階段，尚未建立完整的開發環境。預期會使用以下技術棧：

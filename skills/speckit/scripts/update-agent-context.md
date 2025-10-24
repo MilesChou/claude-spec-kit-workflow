@@ -1,15 +1,6 @@
 # Update Agent Context
 
-## 目的
-
 從 plan.md 提取專案資訊，更新 AI agent context 檔案 (如 CLAUDE.md, GEMINI.md 等)，確保 AI 助手能夠掌握專案的最新技術棧和變更歷史。
-
-## 執行時機
-
-- 完成 plan.md 編寫後
-- 變更專案技術棧時
-- 定期更新專案文件時
-- `/speckit.plan` 或其他相關命令執行後
 
 ## 支援的 Agent 類型
 

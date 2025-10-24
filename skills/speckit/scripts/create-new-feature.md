@@ -65,13 +65,8 @@
 
 ### 5. 初始化 spec.md
 
-取得 template 內容（依以下優先順序）：
-
-1. 如果 Project Knowledge 或對話中有上傳 `spec-template.md` 檔案，使用該檔案內容
-2. 如果透過 GitHub MCP 讀取 remote HEAD branch 有 `.specify/templates/spec-template.md`，使用該檔案內容
-3. 如果都找不到，使用 speckit 內建的 templates/spec-template.md 內容
-
-決定好 spec.md 的內容後，透過 GitHub MCP 建立檔案到新分支：
+依 Skill 規範取得 spec-template 內容後，再透過 GitHub MCP 建立檔案到新分支：
+- 新分支：上一步驟產生的完整分支名稱
 - 路徑：`specs/{分支名稱}/spec.md`
 - 例如：`specs/001-oauth2-authorization/spec.md`
 

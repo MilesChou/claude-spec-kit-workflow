@@ -27,6 +27,8 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 4. Implement (包含多個子任務循環)
 ```
 
+若我問流程為何，或是在哪個階段時，請應用這個流程圖讓我理解。
+
 ## 輸入參數
 
 當使用者調用此 skill 時，應提供以下資訊：
@@ -64,9 +66,41 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 
 ## **重要提醒**
 
-每個指令可能會提示要使用 `.specify/scripts` 裡的腳本，如果有遇到的話，改使用 Skill 的 scripts 目錄裡下對應的 prompt。
+**IMPORTANT**：
+
+使用腳本或讀取檔案的時候，請依下面對應的流程進行。
+
+### 使用 `.specify/scripts/` 裡的腳本
+
+指令可能會提示要使用 `.specify/scripts` 裡的腳本，遇到時，改使用 Skill 的 scripts 目錄裡下對應的 prompt。
 
 例如：在執行 specify 指令時，會呼叫 `.specify/scripts/bash/create-new-feature.sh`，這時要改使用 script/create-new-feature.md 並依裡面的提示執行任務。
+
+**例外**：當呼叫 `update-agent-context.sh` 的時候，直接跳過不執行。
+
+### 讀取 `./memory/constitution.md`
+
+指令可能會提示要讀取 `./memory/constitution.md`，遇到時，請以下面步驟確認：
+
+1. 如果 Project Knowledge 或對話中有上傳 `constitution.md` 檔案，使用該檔案
+2. 如果透過 GitHub MCP 讀取 remote HEAD branch 有 `memory/constitution.md`，使用該檔案
+3. 如果都找不到，就使用 speckit 內建的 templates/constitution-example.md 檔案
+
+### 讀取 `.specify/templates/` 相關樣版
+
+每個指令可能會提示要讀取 `.specify/templates/` 相關樣版，總共有五種如下：
+
+- `agent-file-template.md`
+- `checklist-template.md`
+- `plan-template.md`
+- `spec-template.md`
+- `tasks-template.md`
+
+大概就是 `[類型]-template.md`。遇到時，請以下面步驟確認：
+
+1. 如果 Project Knowledge 或對話中有上傳 `[類型]-template.md` 檔案，使用該檔案內容
+2. 如果透過 GitHub MCP 讀取 remote HEAD branch 有 `.specify/templates/[類型]-template.md`，使用該檔案內容
+3. 如果都找不到，使用 speckit 內建的 templates/[類型]-template.md 內容
 
 ## 執行步驟
 
@@ -82,17 +116,17 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 
 2. 檢查專案環境
     - 檢查必要的 templates 是否存在
-    - 確認 `.specs/features/` 目錄結構
+    - 確認 `specs/features/` 目錄結構
 
 #### 步驟 1.2：產生規格文件
 
 1. 執行功能等同於 `speckit.specify` command
     - 產生 feature branch 的 short name
-    - 載入 `./templates/spec-template.md`
+    - 載入 templates/spec-template.md
     - 根據功能描述產生初始規格
 
 2. 建立品質檢查清單
-    - 自動建立 `checklists/requirements.md`
+    - 自動建立 `specs/<branch-name>/checklists/requirements.md`
     - 驗證規格完整性
     - 標記 [NEEDS CLARIFICATION] 項目
 
@@ -102,7 +136,7 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 
 報告內容：
 1. Feature branch 名稱
-2. 規格檔案路徑：`.specs/features/<branch-name>/spec.md`
+2. 規格檔案路徑：`specs/features/<branch-name>/spec.md`
 3. 品質檢查結果：
     - ✅ 已完成的檢查項目
     - ⚠️ 需要澄清的項目
@@ -129,7 +163,7 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 #### 步驟 2.1：載入當前規格
 
 1. 讀取 feature 的規格檔案
-    - 路徑：`.specs/features/<branch-name>/spec.md`
+    - 路徑：`specs/features/<branch-name>/spec.md`
 
 2. 分析規格的模糊性
     - 掃描各個類別的完整度
@@ -175,8 +209,8 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 #### 步驟 3.1：設定計劃環境
 
 1. 解析路徑
-    - FEATURE_SPEC：`.specs/features/<branch-name>/spec.md`
-    - IMPL_PLAN：`.specs/features/<branch-name>/plan.md`
+    - FEATURE_SPEC：`specs/features/<branch-name>/spec.md`
+    - IMPL_PLAN：`specs/features/<branch-name>/plan.md`
 
 2. 載入上下文
     - 讀取 FEATURE_SPEC
@@ -241,7 +275,7 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 #### 步驟 4.1：設定任務環境
 
 1. 取得 FEATURE_DIR
-    - 路徑：`.specs/features/<branch-name>/`
+    - 路徑：`specs/features/<branch-name>/`
 
 2. 取得 AVAILABLE_DOCS
     - 列出所有可用的設計文件
@@ -398,8 +432,8 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 
 ### Specify 階段輸出
 
-- `.specs/features/<branch-name>/spec.md`：功能規格文件
-- `.specs/features/<branch-name>/checklists/requirements.md`：規格品質檢查清單
+- `specs/features/<branch-name>/spec.md`：功能規格文件
+- `specs/features/<branch-name>/checklists/requirements.md`：規格品質檢查清單
 
 ### Clarify 階段輸出
 
@@ -407,15 +441,15 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 
 ### Plan 階段輸出
 
-- `.specs/features/<branch-name>/plan.md`：實作計劃
-- `.specs/features/<branch-name>/research.md`：技術研究與決策
-- `.specs/features/<branch-name>/data-model.md`：資料模型
-- `.specs/features/<branch-name>/contracts/`：API 合約檔案
-- `.specs/features/<branch-name>/quickstart.md`：快速開始指南
+- `specs/features/<branch-name>/plan.md`：實作計劃
+- `specs/features/<branch-name>/research.md`：技術研究與決策
+- `specs/features/<branch-name>/data-model.md`：資料模型
+- `specs/features/<branch-name>/contracts/`：API 合約檔案
+- `specs/features/<branch-name>/quickstart.md`：快速開始指南
 
 ### Tasks 階段輸出
 
-- `.specs/features/<branch-name>/tasks.md`：可執行的任務清單
+- `specs/features/<branch-name>/tasks.md`：可執行的任務清單
 
 ### Implement 階段輸出
 
@@ -524,7 +558,7 @@ Feature 名稱：user-authentication
 ### 檔案管理
 
 - 所有檔案會建立在 feature branch 的專屬目錄中
-- 路徑格式：`.specs/features/<branch-name>/`
+- 路徑格式：`specs/features/<branch-name>/`
 - 不會覆蓋現有檔案（除非明確要求）
 - 建議使用版本控制追蹤變更
 

@@ -12,7 +12,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-The text the user typed after `speckit.specify` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `$ARGUMENTS` appears literally below. Do not ask the user to repeat it unless they provided an empty command.
+The text the user typed after `/speckit.specify` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `$ARGUMENTS` appears literally below. Do not ask the user to repeat it unless they provided an empty command.
 
 Given that feature description, do this:
 
@@ -28,18 +28,18 @@ Given that feature description, do this:
      - "Create a dashboard for analytics" → "analytics-dashboard"
      - "Fix payment processing timeout bug" → "fix-payment-timeout"
 
-2. Determine the output location:
+2. Run the script `.specify/scripts/bash/create-new-feature.sh --json "$ARGUMENTS"` from repo root **with the short-name argument** and parse its JSON output for BRANCH_NAME and SPEC_FILE. All file paths must be absolute.
 
    **IMPORTANT**:
 
-   - If user provides a directory path in $ARGUMENTS (e.g., "/path/to/feature" or "./my-feature"), use that location as the base directory
-   - Otherwise, use current working directory as the base directory
-   - Create the spec file: `{base-dir}/spec.md`
-   - Create checklists directory: `{base-dir}/checklists/` (for quality validation)
-   - Store SPEC_FILE as absolute path for later use
-   - All paths must be absolute
+   - Append the short-name argument to the `.specify/scripts/bash/create-new-feature.sh --json "$ARGUMENTS"` command with the 2-4 word short name you created in step 1
+   - Bash: `--short-name "your-generated-short-name"`
+   - PowerShell: `-ShortName "your-generated-short-name"`
+   - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot")
+   - You must only ever run this script once
+   - The JSON is provided in the terminal as output - always refer to it to get the actual content you're looking for
 
-3. Load `./templates/spec-template.md` to understand required sections.
+3. Load `.specify/templates/spec-template.md` to understand required sections.
 
 4. Follow this execution flow:
 
@@ -107,7 +107,7 @@ Given that feature description, do this:
       
       ## Notes
       
-      - Items marked incomplete require spec updates before `speckit.clarify` or `speckit.plan`
+      - Items marked incomplete require spec updates before `/speckit.clarify` or `/speckit.plan`
       ```
    
    b. **Run Validation Check**: Review the spec against each checklist item:
@@ -161,9 +161,9 @@ Given that feature description, do this:
    
    d. **Update Checklist**: After each validation iteration, update the checklist file with current pass/fail status
 
-7. Report completion with spec file path, checklist results, and readiness for the next phase (`speckit.clarify` or `speckit.plan`).
+7. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/speckit.clarify` or `/speckit.plan`).
 
-**NOTE:** The spec file is created in the specified or current directory before writing content.
+**NOTE:** The script creates and checks out the new branch and initializes the spec file before writing.
 
 ## General Guidelines
 

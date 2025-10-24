@@ -49,13 +49,13 @@ recreate: ## Recreate speckit directory structure
 		exit 1; \
 	fi
 	@echo "Recreating speckit directory structure (v$(VERSION))..."
-	@mkdir -p speckit
+	@mkdir -p skills/speckit
 	@echo "Copying commands..."
-	@cp .tmp/releases/$(VERSION)/.claude/commands/speckit.*.md speckit/
+	@cp .tmp/releases/$(VERSION)/.claude/commands/speckit.*.md skills/speckit/
 	@echo "Copying templates..."
-	@cp -r .tmp/releases/$(VERSION)/.specify/templates speckit/
+	@cp -r .tmp/releases/$(VERSION)/.specify/templates skills/speckit/
 	@echo "Copying memory..."
-	@cp -r .tmp/releases/$(VERSION)/.specify/memory speckit/
+	@cp -r .tmp/releases/$(VERSION)/.specify/memory skills/speckit/
 	@echo "Done! speckit directory recreated"
 
 .PHONY: source
@@ -74,7 +74,7 @@ source: ## Clone spec-kit source code
 package: ## Package speckit to .tmp/build
 	@echo "Packaging speckit..."
 	@mkdir -p .tmp/build
-	@cd speckit && zip -r ../.tmp/build/speckit.zip . -x "*.DS_Store"
+	@cd skills/speckit && zip -r ../../.tmp/build/speckit.zip . -x "*.DS_Store"
 	@echo "Done! File in .tmp/build/speckit.zip"
 
 .PHONY: diff
@@ -88,7 +88,7 @@ diff: ## Compare specific version with speckit
 	@echo ""
 	@for filename in speckit.analyze.md speckit.checklist.md speckit.clarify.md speckit.constitution.md speckit.implement.md speckit.plan.md speckit.specify.md speckit.tasks.md; do \
 		source_file=".tmp/releases/$(VERSION)/.claude/commands/$$filename"; \
-		target_file="speckit/$$filename"; \
+		target_file="skills/speckit/$$filename"; \
 		echo "========================================"; \
 		echo "File: $$filename"; \
 		echo "========================================"; \

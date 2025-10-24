@@ -5,12 +5,12 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 
 # Speckit
 
-這個 skill 提供一個引導式的工作流程，協助你從功能描述開始，**階段性地**產生完整的 specification、計劃和任務清單。每個階段完成後都會停下來等待你的審核確認，確保品質符合預期後才進入下一階段。
+這個 skill 提供一個引導式的工作流程，協助你從功能描述開始，階段性地產生完整的 specification、計劃和任務清單。每個階段完成後都會停下來等待你的審核確認，確保品質符合預期後才進入下一階段。
 
 ## 核心功能
 
 - 引導式執行 speckit 的標準工作流程
-- **每個階段都有強制性的人工審核點**
+- 每個階段都有強制性的人工審核點
 - 提供清晰的品質檢查清單
 - 支援審核不通過時的修正機制
 - 在每個階段提供詳細的進度報告
@@ -52,6 +52,21 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 
 - **plan / tasks / implement 階段**：
     - **Feature 名稱**（必要）：要處理的 feature branch 名稱
+
+## 資訊確認
+
+依上下文取得下列相關資訊：
+
+- GitHub repo 資訊。例如：`MilesChou/claude-spec-kit-plugin`
+- GitHub MCP。確認工具有安裝即可
+
+若無法取得資訊，請詢問我。
+
+## **重要提醒**
+
+每個指令可能會提示到會使用到 `.specify/scripts` 下的腳本，如果有遇到的話，改使用 .script/ 下對應的 prompt。
+
+例如：在執行 specify 指令時，會呼叫 `.specify/scripts/bash/create-new-feature.sh`，這時改使用 script/create-new-feature.md 並依裡面的提示執行任務。
 
 ## 執行步驟
 

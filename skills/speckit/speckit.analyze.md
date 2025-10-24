@@ -18,21 +18,20 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 
 **STRICTLY READ-ONLY**: Do **not** modify any files. Output a structured analysis report. Offer an optional remediation plan (user must explicitly approve before any follow-up editing commands would be invoked manually).
 
-**Constitution Authority**: The project constitution (`./memory/constitution.md`) is **non-negotiable** within this analysis scope. Constitution conflicts are automatically CRITICAL and require adjustment of the spec, plan, or tasks—not dilution, reinterpretation, or silent ignoring of the principle. If a principle itself needs to change, that must occur in a separate, explicit constitution update outside `/analyze`.
+**Constitution Authority**: The project constitution (`.specify/memory/constitution.md`) is **non-negotiable** within this analysis scope. Constitution conflicts are automatically CRITICAL and require adjustment of the spec, plan, or tasks—not dilution, reinterpretation, or silent ignoring of the principle. If a principle itself needs to change, that must occur in a separate, explicit constitution update outside `/analyze`.
 
 ## Execution Steps
 
 ### 1. Initialize Analysis Context
 
-Determine file locations and verify required artifacts:
-- If user provides a directory path in $ARGUMENTS, use that as base directory
-- Otherwise, use current working directory as base directory
-- Derive absolute paths:
-  - SPEC: `{base-dir}/spec.md`
-  - PLAN: `{base-dir}/plan.md`
-  - TASKS: `{base-dir}/tasks.md`
-- Verify all required files exist; if any is missing: abort with error message and instruct user to run missing prerequisite command
-- All paths must be absolute
+Run `.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
+
+- SPEC = FEATURE_DIR/spec.md
+- PLAN = FEATURE_DIR/plan.md
+- TASKS = FEATURE_DIR/tasks.md
+
+Abort with an error message if any required file is missing (instruct the user to run missing prerequisite command).
+For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 ### 2. Load Artifacts (Progressive Disclosure)
 
@@ -63,7 +62,7 @@ Load only the minimal necessary context from each artifact:
 
 **From constitution:**
 
-- Load `./memory/constitution.md` for principle validation
+- Load `.specify/memory/constitution.md` for principle validation
 
 ### 3. Build Semantic Models
 

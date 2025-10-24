@@ -12,20 +12,9 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. **Setup**: Determine file locations:
-   - If user provides a directory path in $ARGUMENTS, use that as base directory
-   - Otherwise, use current working directory as base directory
-   - Set paths:
-     - FEATURE_SPEC: `{base-dir}/spec.md`
-     - IMPL_PLAN: `{base-dir}/plan.md`
-     - TASKS: `{base-dir}/tasks.md`
-   - Verify required files exist:
-     - REQUIRED: spec.md, plan.md
-     - If missing: instruct user to run the appropriate `speckit.*` command
-   - Check for optional documents: data-model.md, contracts/, research.md, quickstart.md
-   - All paths must be absolute
+1. **Setup**: Run `.specify/scripts/bash/check-prerequisites.sh --json` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load design documents**: Read from base directory:
+2. **Load design documents**: Read from FEATURE_DIR:
    - **Required**: plan.md (tech stack, libraries, structure), spec.md (user stories with priorities)
    - **Optional**: data-model.md (entities), contracts/ (API endpoints), research.md (decisions), quickstart.md (test scenarios)
    - Note: Not all projects have all documents. Generate tasks based on what's available.
@@ -41,7 +30,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Create parallel execution examples per user story
    - Validate task completeness (each user story has all needed tasks, independently testable)
 
-4. **Generate tasks.md**: Use `./templates/tasks-template.md` as structure, fill with:
+4. **Generate tasks.md**: Use `.specify.specify/templates/tasks-template.md` as structure, fill with:
    - Correct feature name from plan.md
    - Phase 1: Setup tasks (project initialization)
    - Phase 2: Foundational tasks (blocking prerequisites for all user stories)

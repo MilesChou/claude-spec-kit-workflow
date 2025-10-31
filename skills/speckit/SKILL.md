@@ -84,7 +84,7 @@ description: 依照 speckit 的標準工作流程，引導式地產生規格文�
 
 1. 如果 Project Knowledge 或對話中有上傳 `constitution.md` 檔案，使用該檔案
 2. 如果透過 GitHub MCP 讀取 remote HEAD branch 有 `memory/constitution.md`，使用該檔案
-3. 如果都找不到，就使用 speckit 內建的 templates/constitution-example.md 檔案
+3. 如果都找不到，就使用 speckit skill 內建的 memory/constitution.md 檔案
 
 ### 讀取 `.specify/templates/` 相關樣版
 
@@ -542,12 +542,6 @@ Feature 名稱：user-authentication
 - 審核不通過時，必須先修正問題才能繼續
 - 這是確保品質的關鍵機制
 
-### 執行環境需求
-
-- 需要有 speckit 的 templates
-- 建議在乾淨的 working directory 執行
-- 確保有足夠的權限建立檔案和目錄
-
 ### 互動式處理
 
 - Clarify 階段會需要使用者回答問題
@@ -595,49 +589,6 @@ Feature 名稱：user-authentication
     - 實作時如發現設計問題，及時更新文件
     - 記錄重要的技術決策
     - 維護文件的準確性
-
-## 相關 Commands
-
-此 skill 整合了以下 commands 的功能：
-
-- `speckit.specify`：產生規格文件
-- `speckit.clarify`：澄清需求
-- `speckit.plan`：產生實作計劃
-- `speckit.tasks`：產生任務清單
-- `speckit.implement`：執行實作任務
-
-如果需要單獨執行某個階段，可以直接使用對應的 command。
-
-## 故障排除
-
-### 問題：Feature branch 已存在
-
-**解決方案：**
-- 使用不同的 feature 名稱
-- 或刪除現有的 feature 目錄後重試
-- 或繼續使用現有 feature 的後續階段
-
-### 問題：缺少 templates
-
-**解決方案：**
-- 確認 speckit 目錄結構完整
-- 檢查 `./templates/` 目錄是否存在
-- 下載或建立缺少的 template 檔案
-
-### 問題：澄清問題太多
-
-**解決方案：**
-- 提供更詳細的功能描述
-- 或選擇跳過澄清階段，在後續手動補充
-- 或分批進行澄清
-
-### 問題：任務執行失敗
-
-**解決方案：**
-- 檢查錯誤訊息
-- 回到 Plan 階段檢視設計
-- 必要時更新 tasks.md
-- 尋求協助解決技術問題
 
 ## 重要提醒
 
